@@ -10,6 +10,13 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
+  /*access_key = "value"
+  secret_key = "value"
+  assume_role {
+    role_arn = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
+    session_name = "value"
+    external_id = "value"
+  }*/
 }
 
 resource "aws_instance" "ec2instance-ni" {

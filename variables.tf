@@ -13,3 +13,28 @@ variable "NoDefaultVar" {
     error_message = "Value must be less than or equal to ten."
   }
 }
+
+variable "Password" {
+  type        = string
+  description = "Input password"
+  sensitive   = true
+}
+
+variable "availability-zones" {
+  type        = list(string)
+  description = "List of allowed AZs"
+  default = ["us-west-2"]
+}
+
+variable "complex-list" {
+  type = list(object({
+    var1 = number
+    var2 = number
+    var3 = string
+  }))
+  default = [{
+    var1 = 1
+    var2 = 2
+    var3 = "ok"
+  }]
+}
