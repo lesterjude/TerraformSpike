@@ -5,7 +5,7 @@ variable "VariableSample" {
   default     = "Default Value If No Input"
 }
 
-variable "NoDefaultVar" {
+/*variable "NoDefaultVar" {
   type        = number
   description = "Variable with no default value"
   validation {
@@ -19,11 +19,12 @@ variable "Password" {
   description = "Input password"
   sensitive   = true
 }
+*/
 
 variable "availability-zones" {
   type        = list(string)
   description = "List of allowed AZs"
-  default = ["us-west-2"]
+  default     = ["us-west-2"]
 }
 
 variable "complex-list" {
@@ -37,4 +38,13 @@ variable "complex-list" {
     var2 = 2
     var3 = "ok"
   }]
+}
+
+variable "external_port" {
+  type    = number
+  default = 8080
+  validation {
+    condition     = can(regex("8080|80", var.external_port))
+    error_message = "Port values can only be 8080 or 80."
+  }
 }
