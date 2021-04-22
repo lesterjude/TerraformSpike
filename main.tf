@@ -1,5 +1,6 @@
 provider "aws" {
-  region = "us-east-1"
+  #region = "us-east-1"
+  region = var.region
   /*access_key = "value"
   secret_key = "value"
   assume_role {
@@ -9,9 +10,22 @@ provider "aws" {
   }*/
 }
 
+module "vpc" {
+  source = "./modules/vpc"
+  region = var.region
+}
+
+resource "aws_instance" "my-instance" {
+  ami           = module.vpc.ami_id
+  subnet_id     = module.vpc.subnet_id
+  instance_type = "t3.micro"
+}
+
+/*
 resource "aws_instance" "ec2instance-ni" {
   ami           = "ami-0742b4e673072066f"
   instance_type = "t2.micro"
+  
   tags = {
     "name" = "first-ec2-from-tf"
     #"ec2-id" = "${self.id}"
@@ -49,6 +63,8 @@ resource "aws_instance" "ec2instance-ni" {
   # }
 }
 
+#null resource provisioner snippet
+
 resource "null_resource" "provisioner" {
   provisioner "local-exec" {
     command = "echo 'created' > status.txt"
@@ -59,3 +75,4 @@ resource "null_resource" "provisioner" {
     command = "echo 'destroyed' > status.txt"
   }
 }
+*/

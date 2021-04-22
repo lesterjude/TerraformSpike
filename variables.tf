@@ -21,6 +21,11 @@ variable "Password" {
 }
 */
 
+variable "region" {
+  type    = string
+  default = "eu-west-2"
+}
+
 variable "availability-zones" {
   type        = list(string)
   description = "List of allowed AZs"
