@@ -25,7 +25,11 @@ resource "aws_instance" "my-instance" {
 resource "aws_instance" "ec2instance-ni" {
   ami           = "ami-0742b4e673072066f"
   instance_type = "t2.micro"
-  
+  user_data = [
+      "sudo yum -y install httpd && sudo systemctl start httpd",
+      "echo '<h1><center>Deployed using Terraform</center></h1>' > index.html",
+      "sudo mv index.html /var/www/html/"
+  ]
   tags = {
     "name" = "first-ec2-from-tf"
     #"ec2-id" = "${self.id}"

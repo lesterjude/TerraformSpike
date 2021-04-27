@@ -1,5 +1,4 @@
-#used to store terraform state file in s3 as configured below
-
+#used to store terraform state file in s3 
 terraform {
   backend "s3" {
     profile = "demo"
@@ -9,8 +8,7 @@ terraform {
   }
 }
 
-# statefil is stored within terraform workspace
-
+# statefile is stored within terraform workspace
 # terraform {
 #   backend "remote" {
 #     organization = "tanolester"
